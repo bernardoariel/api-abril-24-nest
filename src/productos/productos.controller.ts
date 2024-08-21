@@ -40,7 +40,7 @@ export class ProductosController {
     } 
     
     // http://localhost:3000/productos/heladera
-    const productos = await this.productosService.search({ Producto: term });
+    const productos = await this.productosService.search({ Producto: term.trim() });
     if (!productos.length) {
       throw new NotFoundException('Producto no encontrado con el término especificado');
     }
