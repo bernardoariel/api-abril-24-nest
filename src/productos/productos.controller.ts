@@ -28,8 +28,23 @@ export class ProductosController {
 
     return productos;
   }
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productosService.findOne(+id);
+  @Get(':term')
+  async findOne(@Param('term') term: string): Promise<Producto | Producto[]> {
+    // http://localhost:3000/productos/1
+    if (!isNaN(+term)) {
+      const producto = await this.productosService.findOne(+term);
+      if (!producto) {
+        throw new NotFoundException('Producto no encontrado por ID');
+      }
+      return producto;
+    } 
+    
+    // http://localhost:3000/productos/heladera
+    const productos = await this.productosService.search({ Producto: term });
+    if (!productos.length) {
+      throw new NotFoundException('Producto no encontrado con el término especificado');
+    }
+    return productos;
+
   }
 }

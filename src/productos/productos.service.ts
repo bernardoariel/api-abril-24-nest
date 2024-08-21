@@ -13,9 +13,10 @@ export class ProductosService {
     private productosRepository: Repository<Producto>,
   ) {}
   
-  async findAll(): Promise<Producto[]> {
+  async findAll() {
     // Retorna todos los productos
-    return this.productosRepository.find();
+    return 'tarda una banda'
+    // return this.productosRepository.find();
   }
   
   async findTop10(): Promise<Producto[]> {
@@ -30,10 +31,11 @@ export class ProductosService {
   async search(queryParams: any): Promise<Producto[]> {
     const queryBuilder = this.productosRepository.createQueryBuilder('producto');
 
+    // http://localhost:3000/productos/search?CodProducto=100001 
     if (queryParams.CodProducto) {
       queryBuilder.andWhere('producto.CodProducto = :CodProducto', { CodProducto: queryParams.CodProducto });
     }
-
+    // http://localhost:3000/productos/search?Producto=silla
     if (queryParams.Producto) {
       queryBuilder.andWhere('producto.Producto LIKE :Producto', { Producto: `%${queryParams.Producto}%` });
     }
