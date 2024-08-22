@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ProdCostosModule } from './prod-costos/prod-costos.module';
 
 
 
@@ -29,7 +30,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         synchronize: false,
       }),
     }),
-    ProductosModule
+    ProductosModule,
+    ProdCostosModule
   ],
   controllers: [AppController],
   providers: [AppService],
