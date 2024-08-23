@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProdCostosModule } from './prod-costos/prod-costos.module';
+import { CheckDatabaseConnectionMiddleware } from './check-database-connection/check-database-connection.middleware';
 
 
 
@@ -36,4 +37,10 @@ import { ProdCostosModule } from './prod-costos/prod-costos.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(CheckDatabaseConnectionMiddleware)
+      .forRoutes('*'); // Aplica el middleware a todas las rutas
+  }
+}
