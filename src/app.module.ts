@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProdCostosModule } from './prod-costos/prod-costos.module';
 import { CheckDatabaseConnectionMiddleware } from './check-database-connection/check-database-connection.middleware';
+import { ProdImageModule } from './prod-image/prod-image.module';
+
 
 
 
@@ -32,13 +34,14 @@ import { CheckDatabaseConnectionMiddleware } from './check-database-connection/c
       }),
     }),
     ProductosModule,
-    ProdCostosModule
+    ProdCostosModule,
+    ProdImageModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
+configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(CheckDatabaseConnectionMiddleware)
       .forRoutes('*'); // Aplica el middleware a todas las rutas
