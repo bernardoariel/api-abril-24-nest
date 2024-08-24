@@ -4,6 +4,7 @@ import { Producto } from './entities/producto.entity';
 import { Repository } from 'typeorm';
 import { ProdCostosService } from 'src/prod-costos/prod-costos.service';
 import { ProdImageService } from 'src/prod-image/prod-image.service';
+import { ProdStockService } from 'src/prod-stock/prod-stock.service';
 
 @Injectable()
 export class ProductosService {
@@ -12,42 +13,12 @@ export class ProductosService {
     @InjectRepository(Producto)
     private productosRepository: Repository<Producto>,
     private readonly prodCostosService: ProdCostosService,
-    private readonly prodImageService: ProdImageService
+    private readonly prodImageService: ProdImageService,
+    private readonly prodStockService: ProdStockService 
   ) {}
   
-  async findAll() {
-    // Retorna todos los productos
-    return 'tarda una banda'
-    // return this.productosRepository.find();
-  }
   
-  async findTop10(): Promise<Producto[]> {
-    // Retorna los primeros 10 productos
-    return this.productosRepository.find({ take: 10 });
-  }
-
-  findOne(id: number): Promise<Producto> {
-    return this.productosRepository.findOne({ where: { CodProducto: id.toString() } });
-  }
-
-  async search(queryParams: any): Promise<Producto[]> {
-    const queryBuilder = this.productosRepository.createQueryBuilder('producto');
-
-    // http://localhost:3000/productos/search?CodProducto=100001 
-    if (queryParams.CodProducto) {
-      queryBuilder.andWhere('producto.CodProducto = :CodProducto', { CodProducto: queryParams.CodProducto });
-    }
-    
-    if (queryParams.Producto) {
-      queryBuilder.andWhere('producto.Producto LIKE :Producto', { Producto: `%${queryParams.Producto}%` });
-    }
-
-    const productos = await queryBuilder.getMany();
-
-    return productos;
-  }
-  
-  async findOneWithPrice(term: string): Promise<any> {
+  async findProductWithPrice(term: string): Promise<any> {
     let producto: Producto | Producto[];
   
     if (!isNaN(+term)) {
@@ -67,25 +38,43 @@ export class ProductosService {
       return Promise.all(producto.map(async (prod) => {
         const prodCostos = await this.prodCostosService.findByCodProducto(prod.CodProducto);
         const prodImagen = await this.prodImageService.findByCodProducto(prod.CodProducto);
+        const prodStock = await this.prodStockService.findByCodProductoWithStock(prod.CodProducto);
+        const totalStock = prodStock.reduce((total, stock) => total + stock.Cantidad, 0);
+        
         if (!prodCostos) {
           throw new NotFoundException(`Costos no encontrados para el producto con CodProducto: ${prod.CodProducto}`);
         }
+        
         return {
           ...prod,
           Precio: prodCostos.Precio,
           Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+          Stock: totalStock,
+          Sucursales: prodStock.map(stock => ({
+            CodSucursal: stock.CodSucursal,
+            Cantidad: stock.Cantidad,
+          }))
         };
       }));
     } else {
       const prodCostos = await this.prodCostosService.findByCodProducto(producto.CodProducto);
       const prodImagen = await this.prodImageService.findByCodProducto(producto.CodProducto);
+      const prodStock = await this.prodStockService.findByCodProductoWithStock(producto.CodProducto);
+      const totalStock = prodStock.reduce((total, stock) => total + stock.Cantidad, 0);
+      
       if (!prodCostos) {
         throw new NotFoundException('Costos para el producto no encontrados');
       }
+      
       return {
         ...producto,
         Precio: prodCostos.Precio,
         Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+        Stock: totalStock,
+        Sucursales: prodStock.map(stock => ({
+          CodSucursal: stock.CodSucursal,
+          Cantidad: stock.Cantidad,
+        }))
       };
     }
   }

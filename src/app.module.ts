@@ -7,6 +7,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProdCostosModule } from './prod-costos/prod-costos.module';
 import { CheckDatabaseConnectionMiddleware } from './check-database-connection/check-database-connection.middleware';
 import { ProdImageModule } from './prod-image/prod-image.module';
+import { ProdStockModule } from './prod-stock/prod-stock.module';
+import { ProdSucursalModule } from './prod-sucursal/prod-sucursal.module';
+
 
 
 
@@ -35,7 +38,9 @@ import { ProdImageModule } from './prod-image/prod-image.module';
     }),
     ProductosModule,
     ProdCostosModule,
-    ProdImageModule
+    ProdImageModule,
+    ProdStockModule,
+    ProdSucursalModule
   ],
   controllers: [AppController],
   providers: [AppService],
