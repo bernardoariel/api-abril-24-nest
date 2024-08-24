@@ -3,19 +3,28 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
 @Entity('Productos')
 export class Producto {
  
-  @PrimaryColumn({ type: 'varchar', length: 255 })
+  @PrimaryColumn()
   CodProducto: string; 
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column()
   Producto: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column()
   Medida: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
   Descripcion: string;
 
-  @Column({ type: 'decimal', nullable: true })
+  @Column()
   Stock: number;
+  
+  @Column()
+  CodMarca: number;
+
+  @Column()
+  CodRubro: number;
+
+  @Column()
+  CodCategoria: number;
 
 }

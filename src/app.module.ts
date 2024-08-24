@@ -9,6 +9,7 @@ import { CheckDatabaseConnectionMiddleware } from './check-database-connection/c
 import { ProdImageModule } from './prod-image/prod-image.module';
 import { ProdStockModule } from './prod-stock/prod-stock.module';
 import { ProdSucursalModule } from './prod-sucursal/prod-sucursal.module';
+import { ProdMarcaModule } from './prod-marca/prod-marca.module';
 
 
 
@@ -40,7 +41,9 @@ import { ProdSucursalModule } from './prod-sucursal/prod-sucursal.module';
     ProdCostosModule,
     ProdImageModule,
     ProdStockModule,
-    ProdSucursalModule
+    ProdSucursalModule,
+    ProdMarcaModule,
+    ProdMarcaModule
   ],
   controllers: [AppController],
   providers: [AppService],
