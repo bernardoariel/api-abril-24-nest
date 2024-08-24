@@ -3,7 +3,6 @@ import { ProdStockService } from './prod-stock.service';
 import { ProdStockController } from './prod-stock.controller';
 import { ProdStock } from './entities/prod-stock.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductosService } from 'src/productos/productos.service';
 
 @Module({
   imports: [

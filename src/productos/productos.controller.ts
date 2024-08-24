@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, NotFoundException } from '@nestjs/common';
 import { ProductosService } from './productos.service';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('Abril-SqlServer')
 @Controller('productos')
 export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}

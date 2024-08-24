@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ProdSucursalService } from './prod-sucursal.service';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('Abril-SqlServer')
 @Controller('prod-sucursal')
 export class ProdSucursalController {
   constructor(private readonly prodSucursalService: ProdSucursalService) {}
