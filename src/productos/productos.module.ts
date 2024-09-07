@@ -10,7 +10,7 @@ import { ProdStockModule } from 'src/prod-stock/prod-stock.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Producto]),
+    TypeOrmModule.forFeature([Producto],'sqlserverConnection'),
     ProdCostosModule,
     ProdImageModule,
     ProdStockModule

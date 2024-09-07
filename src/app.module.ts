@@ -11,10 +11,6 @@ import { ProdStockModule } from './prod-stock/prod-stock.module';
 import { ProdSucursalModule } from './prod-sucursal/prod-sucursal.module';
 import { ProdMarcaModule } from './prod-marca/prod-marca.module';
 
-
-
-
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,6 +19,7 @@ import { ProdMarcaModule } from './prod-marca/prod-marca.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
+      name: 'sqlserverConnection',
       useFactory: (configService: ConfigService) => ({
         type: 'mssql',
         host: configService.get<string>('DB_HOST_SQLSERVER'),
@@ -35,6 +32,22 @@ import { ProdMarcaModule } from './prod-marca/prod-marca.module';
         },
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: false,
+      }),
+    }),
+     // Conexión a la base de datos PostgreSQL local
+     TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      name: 'postgresConnection', // Nombre de la conexión a PostgreSQL
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST_POSTGRES'),
+        port: Number(configService.get<string>('DB_PORT_POSTGRES')) || 5432,
+        username: configService.get<string>('DB_USERNAME_POSTGRES'),
+        password: configService.get<string>('DB_PASSWORD_POSTGRES'),
+        database: configService.get<string>('DB_DATABASE_POSTGRES'),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: true, // Puedes cambiar esto a 'false' en producción
       }),
     }),
     ProductosModule,

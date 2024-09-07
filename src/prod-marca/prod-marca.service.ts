@@ -6,7 +6,7 @@ import { ProdMarca } from './entities/prod-marca.entity';
 @Injectable()
 export class ProdMarcaService {
   constructor(
-    @InjectRepository(ProdMarca)
+    @InjectRepository(ProdMarca, 'sqlserverConnection')
     private prodMarcaRepository: Repository<ProdMarca>,
   ) {}
 

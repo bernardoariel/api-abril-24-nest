@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProdMarca } from './entities/prod-marca.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProdMarca])],
+  imports: [TypeOrmModule.forFeature([ProdMarca], 'sqlserverConnection')],
   controllers: [ProdMarcaController],
   providers: [ProdMarcaService],
   exports:[ProdMarcaService]

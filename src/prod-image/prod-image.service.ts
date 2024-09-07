@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class ProdImageService {
   constructor(
-    @InjectRepository(ProdImage)
+    @InjectRepository(ProdImage,'sqlserverConnection')
     private prodImagenesRepository: Repository<ProdImage>,
   ) {}
   async findByCodProducto(codProducto: string): Promise<ProdImage | undefined> {

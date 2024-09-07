@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class ProdSucursalService {
 
   constructor(
-    @InjectRepository(Sucursal)
+    @InjectRepository(Sucursal,'sqlserverConnection')
     private sucursalRepository: Repository<Sucursal>,
   ) {}
 

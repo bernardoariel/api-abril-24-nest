@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProdImage]), // Aquí registras la entidad
+    TypeOrmModule.forFeature([ProdImage], 'sqlserverConnection'), // Aquí registras la entidad
   ],
   providers: [ProdImageService],
   exports:[ProdImageService]

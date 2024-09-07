@@ -1,11 +1,13 @@
-import { HttpException, HttpStatus, Inject, Injectable, Logger, NestMiddleware } from '@nestjs/common';
-import { NextFunction } from 'express';
+import { HttpException, HttpStatus, Injectable, Logger, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
 import { DataSource } from 'typeorm';
+import { InjectDataSource } from '@nestjs/typeorm';
 
 @Injectable()
 export class CheckDatabaseConnectionMiddleware implements NestMiddleware {
   private readonly logger = new Logger(CheckDatabaseConnectionMiddleware.name);
-  constructor(@Inject(DataSource) private dataSource: DataSource) {}
+
+  constructor(@InjectDataSource('sqlserverConnection') private dataSource: DataSource) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
     try {

@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class ProdStockService {
   
   constructor(
-    @InjectRepository(ProdStock)
+    @InjectRepository(ProdStock,'sqlserverConnection')
     private prodStockRepository: Repository<ProdStock>,
   ) {}
   async findByCodProductoWithStock(codProducto: string): Promise<ProdStock[]> {

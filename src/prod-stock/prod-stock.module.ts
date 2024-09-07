@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProdStock]), // Asegúrate de registrar la entidad aquí
+    TypeOrmModule.forFeature([ProdStock], 'sqlserverConnection'), // Asegúrate de registrar la entidad aquí
   ],
   controllers: [ProdStockController],
   providers: [ProdStockService],
