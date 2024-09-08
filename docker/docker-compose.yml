@@ -1,14 +1,9 @@
-version: '3.8'
-
 services:
-  # Servicio de NestJS (Backend)
   nest-app:
     build: .
     container_name: nest-app
     ports:
       - '3000:3000'
-    volumes:
-      - ./src:/app/src  # Mapea el directorio de código local
     environment:
       DB_HOST_SQLSERVER: 190.231.99.215
       DB_PORT_SQLSERVER: 1435
@@ -24,7 +19,6 @@ services:
       - postgres
     restart: always
 
-  # Servicio de la base de datos PostgreSQL
   postgres:
     image: postgres:14
     container_name: postgres
@@ -37,14 +31,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  # Servicio de Vue (Frontend)
-  vue-app:
-    build: ../admin-abril
-    container_name: vue-app
-    ports:
-      - '8080:80'
-    depends_on:
-      - nest-app
-
 volumes:
   postgres-data:
+

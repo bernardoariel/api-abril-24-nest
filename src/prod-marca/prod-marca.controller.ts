@@ -13,6 +13,6 @@ export class ProdMarcaController {
 
   @Get(':CodMarca')
   findOne(@Param('CodMarca') CodMarca: string) {
-    return this.prodMarcaService.findOne(CodMarca);
+    return this.prodMarcaService.findOne(+CodMarca);
   }
 }

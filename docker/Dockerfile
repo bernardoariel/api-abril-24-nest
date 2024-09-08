@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Comando para ejecutar la aplicación en modo producción
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]

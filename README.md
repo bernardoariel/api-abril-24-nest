@@ -9,4 +9,9 @@
 3. Clonar .env_template 
 4. Modificar el nombre a .env
 5. Agregar los valores del env de obsidian
+6. Docker
+
+```
+docker-compose up --build --force-recreate
+```
 

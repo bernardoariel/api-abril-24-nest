@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
 export class ProdMarca {
 
     @PrimaryColumn()
-    CodMarca: string;
+    CodMarca: number;
     
     @Column()
     Marca: string;

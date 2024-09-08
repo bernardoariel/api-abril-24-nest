@@ -13,8 +13,10 @@ export class ProdMarcaService {
   findAll(): Promise<ProdMarca[]> {
     return this.prodMarcaRepository.find();
   }
-
-  findOne(CodMarca: string): Promise<ProdMarca> {
+  findByNombre(nombreMarca: string): Promise<ProdMarca> {
+    return this.prodMarcaRepository.findOne({ where: { Marca: nombreMarca } });
+  }
+  findOne(CodMarca: number): Promise<ProdMarca> {
     return this.prodMarcaRepository.findOne({ where: { CodMarca } });
   }
 }
