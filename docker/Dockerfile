@@ -13,6 +13,9 @@ RUN npm install
 # Copia el resto del código
 COPY . .
 
+# Copia los certificados SSL
+COPY ./certificates /app/certificates
+
 # Construye la aplicación
 RUN npm run build
 
