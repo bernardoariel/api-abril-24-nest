@@ -3,12 +3,12 @@ version: '3.8'
 services:
   # Servicio de NestJS (Backend)
   nest-app:
-    build: .
+    build: .  # Ruta correcta al backend NestJS
     container_name: nest-app
     ports:
       - '3000:3000'
     volumes:
-      - ./src:/app/src  # Mapea el directorio de código local
+      - ./src:/app/src  # Mapea el código fuente del backend
     environment:
       DB_HOST_SQLSERVER: 190.231.99.215
       DB_PORT_SQLSERVER: 1435
@@ -39,7 +39,7 @@ services:
 
   # Servicio de Vue (Frontend)
   vue-app:
-    build: ../admin-abril
+    build: ../app-abril-24  # Ruta correcta al frontend Vue
     container_name: vue-app
     ports:
       - '8080:80'
