@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Servicio de NestJS (Backend)
   nest-app:
     build: .  # Ruta correcta al backend NestJS
     container_name: nest-app
@@ -23,8 +22,9 @@ services:
     depends_on:
       - postgres
     restart: always
+    networks:
+      - app-network
 
-  # Servicio de la base de datos PostgreSQL
   postgres:
     image: postgres:14
     container_name: postgres
@@ -36,15 +36,22 @@ services:
       - '5432:5432'
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
-  # Servicio de Vue (Frontend)
   vue-app:
-    build: ../app-abril-24  # Ruta correcta al frontend Vue
+    build: ../admin-abril  # Ruta correcta al frontend Vue
     container_name: vue-app
     ports:
       - '8080:80'
     depends_on:
       - nest-app
+    networks:
+      - app-network
 
 volumes:
   postgres-data:
+
+networks:
+  app-network:
+    driver: bridge

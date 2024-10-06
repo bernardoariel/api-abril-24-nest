@@ -75,7 +75,8 @@ export class ProductosService {
                 productosConStock.push({
                     ...prod,
                     Precio: prodCostos.Precio,
-                    Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+                    // Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+                    Imagen: prodImagen?.URL.replace('10.10.0.12', 'abril.arielbernardo.com/public_image') || null,
                     Stock: totalStock,
                     Sucursales: prodStock.map(stock => ({
                         CodSucursal: stock.CodSucursal,
@@ -109,7 +110,8 @@ export class ProductosService {
         return {
             ...producto,
             Precio: prodCostos.Precio,
-            Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+            // Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+            Imagen: prodImagen?.URL.replace('10.10.0.12', 'abril.arielbernardo.com/public_image') || null,
             Stock: totalStock,
             Sucursales: prodStock.map(stock => ({
                 CodSucursal: stock.CodSucursal,
@@ -155,7 +157,8 @@ export class ProductosService {
             productosConStock.push({
                 ...prod,
                 Precio: prodCostos.Precio,
-                Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+                // Imagen: prodImagen?.URL.replace('10.10.0.12', 'abcentro.quaga.net') || null,
+                Imagen: prodImagen?.URL.replace('10.10.0.12', 'abril.arielbernardo.com/public_image') || null,
                 Stock: totalStock,
                 Sucursales: prodStock.map(stock => ({
                     CodSucursal: stock.CodSucursal,

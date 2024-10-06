@@ -14,16 +14,16 @@ async function bootstrap() {
 
   app.enableCors({
     origin: '*',
-    methods: 'GET,HEAD', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   });
   const config = new DocumentBuilder()
   .setTitle('ABRIL')
-  .setDescription('Estas son los endpoint de abril amoblamientos')
+  .setDescription('ENDPOINTS de Abril Amoblamientos')
   .setVersion('1.0')
   .build();
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   await app.listen(3000);
 }
 bootstrap();
