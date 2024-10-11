@@ -1,0 +1,19 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FormaPagoPlanes } from './entities/forma-pago-plane.entity';
+import { Repository } from 'typeorm';
+
+
+@Injectable()
+export class FormaPagoPlanesService {
+  
+  constructor(
+    @InjectRepository(FormaPagoPlanes,'sqlserverConnection')
+    private formaPagoPlanesRepository:Repository<FormaPagoPlanes>,
+  ){}
+
+  async findAll(): Promise<FormaPagoPlanes[]> {
+    return await this.formaPagoPlanesRepository.find();
+  }
+  
+}

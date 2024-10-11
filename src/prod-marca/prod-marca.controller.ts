@@ -1,6 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ProdMarcaService } from './prod-marca.service';
 import { ApiTags } from '@nestjs/swagger';
+
 @ApiTags('Abril-SqlServer')
 @Controller('prod-marca')
 export class ProdMarcaController {
