@@ -14,9 +14,6 @@ export class Usuario {
     @Column({name:'Estado'})
     Estado: string;
 
-    @Column({name:'Clave'})
-    Clave:string;
-
     @Column({name:'eMail'})
     eMail:string;
 
