@@ -8,9 +8,8 @@ import { ApiTags } from '@nestjs/swagger';
 export class FormaPagoPlanesController {
   constructor(private readonly formaPagoPlanesService: FormaPagoPlanesService) {}
 
- @Get()
+  @Get()
  async findAll() {
-  console.log('findall')
     return await this.formaPagoPlanesService.findAll();
  }
 
