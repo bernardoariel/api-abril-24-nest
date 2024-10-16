@@ -11,5 +11,10 @@ export class FormaPagoPlanesController {
  @Get()
  async findAll() {
     return await this.formaPagoPlanesService.findAll();
+ }
+
+ @Get(':CodForPago')
+  async findOne(@Param('CodForPago') CodForPago: string) {
+    return await this.formaPagoPlanesService.findOne(CodForPago);
   }
 }

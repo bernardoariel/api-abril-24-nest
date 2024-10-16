@@ -15,5 +15,12 @@ export class FormaPagoPlanesService {
   async findAll(): Promise<FormaPagoPlanes[]> {
     return await this.formaPagoPlanesRepository.find();
   }
+
+  async findOne(CodForPago: string): Promise<FormaPagoPlanes[]> {
+    const results = await this.formaPagoPlanesRepository.find({ where: { CodForPago } });
+    console.log(results);  // Verifica los resultados en la consola
+    return results;
+  }
+  
   
 }
