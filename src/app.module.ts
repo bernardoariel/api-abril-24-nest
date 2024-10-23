@@ -12,6 +12,9 @@ import { ProdSucursalModule } from './prod-sucursal/prod-sucursal.module';
 import { ProdMarcaModule } from './prod-marca/prod-marca.module';
 import { FormaPagoPlanesModule } from './forma-pago-planes/forma-pago-planes.module';
 import { FormaPagoModule } from './forma-pago/forma-pago.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+
 
 @Module({
   imports: [
@@ -60,7 +63,9 @@ import { FormaPagoModule } from './forma-pago/forma-pago.module';
     ProdMarcaModule,
     ProdMarcaModule,
     FormaPagoPlanesModule,
-    FormaPagoModule
+    FormaPagoModule,
+    AuthModule,
+    UsuariosModule
   ],
   controllers: [AppController],
   providers: [AppService],

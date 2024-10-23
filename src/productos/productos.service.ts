@@ -19,7 +19,9 @@ export class ProductosService {
     private readonly prodMarcaService: ProdMarcaService 
   ) {}
   
-  
+  async findAllProducts(): Promise<Producto[]> {
+    return await this.productosRepository.find();
+  }
   async findProductWithPrice(term: string): Promise<any> {
     let producto: Producto | Producto[];
 
@@ -96,9 +98,9 @@ export class ProductosService {
         const prodStock = await this.prodStockService.findByCodProductoWithStock(producto.CodProducto);
         const totalStock = prodStock.reduce((total, stock) => total + stock.Cantidad, 0);
 
-        if (totalStock === 0) {
+        /* if (totalStock === 0) {
             throw new NotFoundException('El producto no tiene stock disponible');
-        }
+        } */
 
         const prodCostos = await this.prodCostosService.findByCodProducto(producto.CodProducto);
         const prodImagen = await this.prodImageService.findByCodProducto(producto.CodProducto);
@@ -175,7 +177,6 @@ export class ProductosService {
     // Devolver productos con stock
     return productosConStock;
 }
-
 
   
   
