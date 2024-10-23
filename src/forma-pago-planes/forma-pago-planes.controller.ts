@@ -10,7 +10,6 @@ export class FormaPagoPlanesController {
 
  @Get()
  async findAll() {
-  console.log('findall')
     return await this.formaPagoPlanesService.findAll();
   }
 }

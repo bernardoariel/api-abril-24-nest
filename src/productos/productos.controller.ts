@@ -1,12 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, NotFoundException } from '@nestjs/common';
+import { Controller, Get,Param, NotFoundException } from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { ApiTags } from '@nestjs/swagger';
+
 
 @ApiTags('Abril-SqlServer')
 @Controller('productos')
 export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 
+  @Get()
+  async findAll(): Promise<any> {
+    const result = await this.productosService.findAllProducts();
+
+    if (!result || result.length === 0) {
+      throw new NotFoundException('No se encontraron productos');
+    }
+
+    return {
+      total: result.length,
+      result,
+    };
+  }
+  
   @Get(':term')
   async findOne(@Param('term') term: string): Promise<any> {
     const result = await this.productosService.findProductWithPrice(term);
@@ -14,9 +29,14 @@ export class ProductosController {
     if (!result) {
       throw new NotFoundException('Producto no encontrado');
     }
+      // Si es un único producto, lo mostramos sin importar el stock
+      if (!Array.isArray(result)) {
+        return result;
+      }
   
     return result;
   }
+  
   @Get(':term/:marcas')
   async findProductsByMarca(@Param('term') term: string, @Param('marcas') marcas: string): Promise<any> {
     let result;
@@ -25,7 +45,7 @@ export class ProductosController {
     if (marcas === 'marcas' || marcas === 'true') {
       result = await this.productosService.findProductsByMarca(term);
     } else {
-      // Si no, buscamos productos por el término (nombre o código)
+
       result = await this.productosService.findProductWithPrice(term);
     }
 
@@ -35,4 +55,5 @@ export class ProductosController {
 
     return result;
   }
+  
 }
